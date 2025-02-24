@@ -69,8 +69,8 @@ float operands::lmul_single(uint8_t fp32_uint8_x, uint8_t fp32_uint8_y, int num_
     float fy = std::get<2>(res_y);
     
     // #pragma omp parallel for collapse(2) num_threads(8)
-    // float res = sign * (1.0f + fx + fy + lm) * powf(2.0f, Ex + Ey);
-    float res = sign * (1.0f + fx) * (1.0f + fy) * std::powf(2.0f, Ex + Ey);
+    float res = sign * (1.0f + fx + fy + std::powf(2.0f, -lm)) * std::powf(2.0f, Ex + Ey);
+    // float res = sign * (1.0f + fx) * (1.0f + fy) * std::powf(2.0f, Ex + Ey);
     return res;
 }
 
